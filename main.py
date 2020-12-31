@@ -1,5 +1,5 @@
 #Import libraries
-
+import os
 import random, time, pygame, sys
 from pygame.locals import *
 
@@ -389,6 +389,8 @@ def addToBoard(board, piece):
         for y in range(TEMPLATEHEIGHT):
             if SHAPES[piece['shape']][piece['rotation']][y][x] != BLANK:
                 board[x + piece['x']][y + piece['y']] = piece['color']
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('bubble.mp3'), maxtime=600)
+
 
 
 #Reset board 
@@ -423,8 +425,8 @@ def isCompleteLine(board, y):
     for x in range(BOARDWIDTH):
         if board[x][y] == BLANK:
             return False
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound('splash.mp3'), maxtime=1800)
     return True
-
 
 #If it is complete, then remove the line
 
@@ -479,12 +481,12 @@ def drawBoard(board):
 def drawStatus(score, level):
     scoreSurf = BASICFONT.render('Score: %s' % score, True, TEXTCOLOR)
     scoreRect = scoreSurf.get_rect()
-    scoreRect.topleft = (WINDOWWIDTH - 397.5, 22.5)
+    scoreRect.topleft = (WINDOWWIDTH - 397, 27)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
     levelSurf = BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)
     levelRect = levelSurf.get_rect()
-    levelRect.topleft = (WINDOWWIDTH - 397.5, 52.5)
+    levelRect.topleft = (WINDOWWIDTH - 397, 52.9)
     DISPLAYSURF.blit(levelSurf, levelRect)
 
 #Draw piece 
@@ -504,9 +506,9 @@ def drawPiece(piece, pixelx=None, pixely=None):
 def drawNextPiece(piece):
     nextSurf = BASICFONT.render('Next:', True, TEXTCOLOR)
     nextRect = nextSurf.get_rect()
-    nextRect.topleft = (WINDOWWIDTH - 397.5, 82.5)
+    nextRect.topleft = (WINDOWWIDTH - 397, 78.0)
     DISPLAYSURF.blit(nextSurf, nextRect)
-    drawPiece(piece, pixelx=WINDOWWIDTH-300, pixely=22.5)
+    drawPiece(piece, pixelx=WINDOWWIDTH-298, pixely=21)
 
 #Call main
 
