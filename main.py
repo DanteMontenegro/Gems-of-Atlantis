@@ -183,7 +183,7 @@ def main():
         if random.randint(0, 1) == 0:
             pygame.mixer.music.load('ambience.mp3')
         else:
-            pygame.mixer.music.load('ambience.mp3')
+            pygame.mixer.music.load('ambience2.mp3')
         pygame.mixer.music.play(-1, 0.0)
         runGame()
         pygame.mixer.music.stop()
