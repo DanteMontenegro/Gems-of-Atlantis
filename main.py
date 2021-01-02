@@ -30,6 +30,7 @@ LIGHTPINK = (128, 0, 255)
 GREEN = ( 0, 120, 3)
 LIGHTGREEN = ( 20, 175, 20)
 BLUE = ( 0, 0, 155)
+BLUE2 = ( 2, 130, 162)
 LIGHTBLUE = ( 20, 20, 175)
 YELLOW = (0, 119, 120)
 LIGHTYELLOW = (23, 159, 161)
@@ -187,6 +188,7 @@ def main():
         pygame.mixer.music.play(-1, 0.0)
         runGame()
         pygame.mixer.music.stop()
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound('gameover.wav'), maxtime=2400)
         showTextScreen('Game Over')
 
 #Set start game configs
@@ -333,7 +335,7 @@ def checkForKeyPress():
         return event.key 
     return None
 
-#Display curtomized text on screen
+#Display customized text on screen
 
 def showTextScreen(text):
     titleSurf, titleRect = makeTextObjs(text, BIGFONT, TEXTSHADOWCOLOR)
@@ -479,16 +481,25 @@ def drawBoard(board):
 #Draw Status 
 
 def drawStatus(score, level):
-    scoreSurf = BASICFONT.render('Score: %s' % score, True, TEXTCOLOR)
+    scoreSurf = BASICFONT.render('Score: %s' % score, True, BORDERCOLOR)
     scoreRect = scoreSurf.get_rect()
     scoreRect.topleft = (WINDOWWIDTH - 397, 27)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
-    levelSurf = BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)
+    scoreSurf = BASICFONT.render('Score: %s' % score, True, BLUE2)
+    scoreRect = scoreSurf.get_rect()
+    scoreRect.topleft = (WINDOWWIDTH - 395, 27)
+    DISPLAYSURF.blit(scoreSurf, scoreRect)
+
+    levelSurf = BASICFONT.render('Level: %s' % level, True, BORDERCOLOR)
     levelRect = levelSurf.get_rect()
     levelRect.topleft = (WINDOWWIDTH - 397, 52.9)
     DISPLAYSURF.blit(levelSurf, levelRect)
 
+    levelSurf = BASICFONT.render('Level: %s' % level, True, BLUE2)
+    levelRect = levelSurf.get_rect()
+    levelRect.topleft = (WINDOWWIDTH - 395, 52.9)
+    DISPLAYSURF.blit(levelSurf, levelRect)
 #Draw piece 
 
 def drawPiece(piece, pixelx=None, pixely=None):
@@ -504,11 +515,16 @@ def drawPiece(piece, pixelx=None, pixely=None):
 #Draw next piece
 
 def drawNextPiece(piece):
-    nextSurf = BASICFONT.render('Next:', True, TEXTCOLOR)
+    nextSurf = BASICFONT.render('Next:', True, BORDERCOLOR)
     nextRect = nextSurf.get_rect()
-    nextRect.topleft = (WINDOWWIDTH - 397, 78.0)
+    nextRect.topleft = (WINDOWWIDTH - 397, 77.9)
     DISPLAYSURF.blit(nextSurf, nextRect)
-    drawPiece(piece, pixelx=WINDOWWIDTH-298, pixely=21)
+
+    nextSurf = BASICFONT.render('Next:', True, BLUE2)
+    nextRect = nextSurf.get_rect()
+    nextRect.topleft = (WINDOWWIDTH - 395, 77.9)
+    DISPLAYSURF.blit(nextSurf, nextRect)
+    drawPiece(piece, pixelx=WINDOWWIDTH-298, pixely=20)
 
 #Call main
 
